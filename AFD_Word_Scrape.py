@@ -60,7 +60,7 @@ def download_data(wfo, year):
             z.extractall(extract_dir)
         return extract_dir
 
-    url = f"https://mesonet.agron.iastate.edu/cgi-bin/afos/retrieve.py?sdate={start_date}&edate={end_date}&pil=AFD{wfo}&fmt=zip&limit=9999"
+    url = f"https://mesonet.agron.iastate.edu/cgi-bin/afos/retrieve.py?sdate={start_date}&edate={end_date}&pil=AFD{wfo}&fmt=zip&limit=99999"
     
     try:
         response = requests.get(url)
@@ -181,10 +181,6 @@ def process_region(region):
     for wfo, years in missing_data.items():
         print(f"{wfo}: {', '.join(map(str, years))}")
 
+
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python AFD_Word_Scrape.py <region>")
-    elif sys.argv[1] not in region_dict:
-        print(f"Invalid region: {sys.argv[1]}")
-    else:
-        process_region(sys.argv[1])
+    process_region(sys.argv[1])
